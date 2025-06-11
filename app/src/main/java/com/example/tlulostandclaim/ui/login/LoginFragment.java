@@ -51,7 +51,7 @@ public class LoginFragment extends Fragment {
     // Thiết lập dữ liệu mặc định và UI ban đầu
     private void setupUI() {
         // Gán dữ liệu mẫu để test nhanh
-        binding.inputEmail.setText("vanrap136@gmail.com");
+        binding.inputEmail.setText("rap13062003@gmail.com");
         binding.inputPassword.setText("123456");
 
         // Nếu là ADMIN, ẩn các lựa chọn không cần thiết
