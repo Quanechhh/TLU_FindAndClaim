@@ -111,3 +111,20 @@ public class RegisterFragment extends Fragment {
         observeData();
     }
 
+    /**
+     * Hàm lắng nghe dữ liệu phản hồi sau khi gọi đăng ký người dùng.
+     */
+    private void observeData() {
+        viewModel.getRegisterUserResponse().observe(getViewLifecycleOwner(), s -> {
+            if (s != null) {
+                if (s.isEmpty()) {
+                    // Đăng ký thành công -> quay về màn hình trước
+                    navController.navigateUp();
+                } else {
+                    // Đăng ký thất bại -> hiển thị lỗi
+                    GlobalFunction.showToastMessage(requireContext(), s);
+                }
+            }
+        });
+    }
+}
