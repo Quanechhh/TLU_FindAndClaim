@@ -26,9 +26,11 @@
                     android:id="@+id/image_back"
                     android:layout_width="26dp"
                     android:layout_height="26dp"
-                    android:layout_marginEnd="20dp"
                     android:src="@drawable/ic_arrow_back_24"
-                    app:tint="@color/white" />
+                    app:tint="@color/white"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="19dp"
+                    tools:srcCompat="@drawable/ic_arrow_back_24" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text_create_new_account"
