@@ -6,13 +6,14 @@ public class User {
     private String mobilePhone;
     private String studentId;
     private String email;
+    private String password;  // ← Thêm dòng này
     private String role;
 
-    // Constructor rỗng (bắt buộc cho Firestore hoặc Firebase)
+    // Constructor rỗng
     public User() {
     }
 
-    // Constructor đầy đủ 6 tham số
+    // Constructor đầy đủ (gồm password)
     public User(String id, String fullName, String mobilePhone, String studentId, String email, String role) {
         this.id = id;
         this.fullName = fullName;
@@ -22,7 +23,7 @@ public class User {
         this.role = role;
     }
 
-    // Getter và Setter
+    // Getter & Setter cho tất cả thuộc tính
     public String getId() {
         return id;
     }
@@ -61,6 +62,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {  // ← Thêm getter
+        return password;
+    }
+
+    public void setPassword(String password) {  // ← Thêm setter
+        this.password = password;
     }
 
     public String getRole() {
