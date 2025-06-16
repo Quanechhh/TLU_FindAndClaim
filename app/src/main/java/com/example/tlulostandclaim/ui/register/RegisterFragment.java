@@ -18,7 +18,6 @@ import com.example.tlulostandclaim.BuildConfig;
 import com.example.tlulostandclaim.R;
 import com.example.tlulostandclaim.data.model.User;
 import com.example.tlulostandclaim.databinding.FragmentRegisterBinding;
-import com.example.tlulostandclaim.utils.GlobalData;
 import com.example.tlulostandclaim.utils.GlobalFunction;
 
 public class RegisterFragment extends Fragment {

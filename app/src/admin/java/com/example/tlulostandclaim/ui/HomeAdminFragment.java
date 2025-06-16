@@ -28,26 +28,19 @@ public class HomeAdminFragment extends Fragment {
 
     private NavController navController;
     private FragmentHomeAdminBinding binding;
+    private HomeAdminViewModel viewModel;
 
     private List<Integer> featuresList = new ArrayList<>();
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         navController = NavHostFragment.findNavController(HomeAdminFragment.this);
+        viewModel = new ViewModelProvider(this).get(HomeAdminViewModel.class);
         binding = FragmentHomeAdminBinding.inflate(inflater, container, false);
         featuresList.clear();
         featuresList.add(R.drawable.image_admin_user);
         featuresList.add(R.drawable.image_admin_category);
         featuresList.add(R.drawable.image_admin_stastic);
         return binding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        binding.toolbarAdmin.imageBack.setVisibility(View.GONE);
-        binding.toolbarAdmin.textToolbarTitle.setText("Admin");
-        binding.listOfFeatures.setLayoutManager(new GridLayoutManager(requireContext(), 2));
     }
 }

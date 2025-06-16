@@ -18,7 +18,6 @@ import com.example.tlulostandclaim.R;
 import com.example.tlulostandclaim.data.enum_model.EnumUserRole;
 import com.example.tlulostandclaim.data.model.User;
 import com.example.tlulostandclaim.databinding.FragmentLoginBinding;
-import com.example.tlulostandclaim.utils.GlobalData;
 import com.example.tlulostandclaim.utils.GlobalFunction;
 
 public class LoginFragment extends Fragment {
