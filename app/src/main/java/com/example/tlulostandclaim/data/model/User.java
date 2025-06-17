@@ -1,30 +1,51 @@
 package com.example.tlulostandclaim.data.model;
 
+/**
+ * Lớp User đại diện cho thông tin người dùng trong hệ thống.
+ * Bao gồm các thông tin cá nhân, thông tin đăng nhập và phân quyền người dùng.
+ */
 public class User {
-    private String id;
-    private String fullName;
-    private String mobilePhone;
-    private String studentId;
-    private String email;
-    private String password;
-    private String role;
+    // 🔹 Các thuộc tính (fields)
+    private String id;             // ID của người dùng (tự sinh hoặc từ Firebase)
+    private String fullName;       // Họ tên đầy đủ
+    private String mobilePhone;    // Số điện thoại
+    private String studentId;      // Mã số sinh viên
+    private String email;          // Email người dùng (dùng để đăng nhập)
+    private int role;              // Vai trò (ví dụ: 0 = user, 1 = admin)
+    private String password;       // Mật khẩu (mã hóa hoặc plain text tuỳ yêu cầu)
 
-    // Constructor rỗng
-    public User() {
+    // 🔹 Constructor mặc định (dùng khi cần tạo object trống)
+    public User() {}
+
+    // 🔹 Constructor đăng nhập: chỉ cần email và password
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
-    // ✅ Constructor đầy đủ (bao gồm password)
-    public User(String id, String fullName, String mobilePhone, String studentId, String email, String password, String role) {
+    // 🔹 Constructor tạo người dùng đầy đủ (chưa có password)
+    public User(String id, String fullName, String mobilePhone, String studentId, String email, int role) {
         this.id = id;
         this.fullName = fullName;
         this.mobilePhone = mobilePhone;
         this.studentId = studentId;
         this.email = email;
-        this.password = password;
         this.role = role;
     }
 
-    // Getter & Setter
+    // 🔹 Constructor đầy đủ nhất: dùng khi lấy từ DB hoặc tạo mới có đầy đủ thông tin
+    public User(String id, String fullName, String mobilePhone, String studentId, String email, int role, String password) {
+        this.id = id;
+        this.fullName = fullName;
+        this.mobilePhone = mobilePhone;
+        this.studentId = studentId;
+        this.email = email;
+        this.role = role;
+        this.password = password;
+    }
+
+    // 🔹 Getter và Setter cho từng thuộc tính
+
     public String getId() {
         return id;
     }
@@ -65,19 +86,19 @@ public class User {
         this.email = email;
     }
 
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 }
