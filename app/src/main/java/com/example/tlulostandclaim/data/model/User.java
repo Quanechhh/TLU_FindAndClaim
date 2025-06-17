@@ -6,24 +6,25 @@ public class User {
     private String mobilePhone;
     private String studentId;
     private String email;
-    private String password;  // ← Thêm dòng này
+    private String password;
     private String role;
 
     // Constructor rỗng
     public User() {
     }
 
-    // Constructor đầy đủ (gồm password)
-    public User(String id, String fullName, String mobilePhone, String studentId, String email, String role) {
+    // ✅ Constructor đầy đủ (bao gồm password)
+    public User(String id, String fullName, String mobilePhone, String studentId, String email, String password, String role) {
         this.id = id;
         this.fullName = fullName;
         this.mobilePhone = mobilePhone;
         this.studentId = studentId;
         this.email = email;
+        this.password = password;
         this.role = role;
     }
 
-    // Getter & Setter cho tất cả thuộc tính
+    // Getter & Setter
     public String getId() {
         return id;
     }
@@ -64,11 +65,11 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {  // ← Thêm getter
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {  // ← Thêm setter
+    public void setPassword(String password) {
         this.password = password;
     }
 
