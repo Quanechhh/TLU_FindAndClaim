@@ -22,65 +22,58 @@ import com.example.tlulostandclaim.utils.GlobalData;
 import com.example.tlulostandclaim.utils.GlobalFunction;
 
 public class LoginFragment extends Fragment {
-    private FragmentLoginBinding binding; // Binding cho layout fragment_login.xml
-    private LoginViewModel viewModel; // ViewModel xử lý logic đăng nhập
-    private NavController navController; // Điều hướng giữa các Fragment
+
+    private FragmentLoginBinding binding;         // Binding với file layout fragment_login.xml
+    private LoginViewModel viewModel;             // ViewModel để xử lý logic đăng nhập
+    private NavController navController;          // Điều hướng giữa các màn hình (fragment)
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate layout thông qua ViewBinding
         binding = FragmentLoginBinding.inflate(inflater, container, false);
-
-        // Khởi tạo ViewModel để quản lý dữ liệu UI
-        viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-
-        // Khởi tạo NavController để điều hướng giữa các Fragment
-        navController = NavHostFragment.findNavController(LoginFragment.this);
-
-        return binding.getRoot(); // Trả về root view
+        viewModel = new ViewModelProvider(this).get(LoginViewModel.class); // Khởi tạo ViewModel
+        navController = NavHostFragment.findNavController(LoginFragment.this); // Lấy NavController
+        return binding.getRoot(); // Trả về root view của layout
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Xử lý sự kiện khi người dùng nhấn nút "Đăng nhập"
+        // Sự kiện khi ấn nút "Đăng nhập"
         binding.buttonSignIn.setOnClickListener(v -> {
             String email = binding.inputEmail.getText().toString();
             String password = binding.inputPassword.getText().toString();
 
-            // Kiểm tra các trường bắt buộc
+            // Kiểm tra nếu email hoặc password trống
             if (email.isEmpty() || password.isEmpty()) {
                 GlobalFunction.showToastMessage(requireContext(), GlobalData.needToFillAllFields);
             } else {
-                // Gửi thông tin đăng nhập tới ViewModel
+                // Gọi ViewModel thực hiện đăng nhập với email và password
                 viewModel.loginEmail(new User(email, password));
             }
         });
 
-        // Nếu đang ở chế độ ADMIN (xác định qua biến cấu hình), ẩn chức năng "Quên mật khẩu" và "Đăng ký"
+        // Ẩn chức năng "Quên mật khẩu" và "Đăng ký" nếu đang đăng nhập bằng quyền ADMIN
         if (BuildConfig.ROLE == "ADMIN") {
             binding.textForgetPassword.setVisibility(View.INVISIBLE);
             binding.textSignUp.setVisibility(View.INVISIBLE);
         }
 
-        // Gán sẵn email và mật khẩu mẫu để test nhanh
-        binding.inputEmail.setText("tuanprokt44@gmail.com");
+        // Mặc định gán sẵn email và password vào input (chỉ dùng trong dev/test)
+        binding.inputEmail.setText("vanrap13062003@gmail.com");
         binding.inputPassword.setText("123456");
 
-        // Xử lý nút hiện/ẩn mật khẩu
+        // Sự kiện ẩn/hiện mật khẩu khi click vào icon mắt
         binding.imageShowPassword.setOnClickListener(v -> {
             viewModel.isHidePassword = !viewModel.isHidePassword;
 
             if (viewModel.isHidePassword) {
-                // Hiển thị icon "mật khẩu bị ẩn"
                 binding.imageShowPassword.setImageResource(R.drawable.ic_show_password);
                 binding.inputPassword.setInputType(
                         InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD
                 );
             } else {
-                // Hiển thị icon "mật khẩu đang hiển thị"
                 binding.imageShowPassword.setImageResource(R.drawable.ic_hide_password);
                 binding.inputPassword.setInputType(
                         InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
@@ -88,44 +81,39 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        // Chuyển đến màn hình "Đăng ký"
+        // Sự kiện chuyển sang màn hình "Đăng ký"
         binding.textSignUp.setOnClickListener(v -> {
             navController.navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment());
-            viewModel.clearLoginResponse(); // Xoá kết quả đăng nhập trước đó
+            viewModel.clearLoginResponse(); // Xóa kết quả đăng nhập trước đó
         });
 
-        // Chuyển đến màn hình "Quên mật khẩu"
+        // Sự kiện chuyển sang màn hình "Quên mật khẩu"
         binding.textForgetPassword.setOnClickListener(v -> {
             navController.navigate(LoginFragmentDirections.actionLoginFragmentToForgetPasswordFragment());
         });
 
-        observeData(); // Bắt đầu lắng nghe dữ liệu từ ViewModel
+        observeData(); // Lắng nghe dữ liệu phản hồi từ ViewModel
     }
 
-    /**
-     * Hàm lắng nghe LiveData từ ViewModel để xử lý kết quả đăng nhập.
-     */
+    // Phương thức quan sát kết quả đăng nhập từ ViewModel
     private void observeData() {
         viewModel.loginUserResponse().observe(getViewLifecycleOwner(), s -> {
             if (s != null) {
-                if (s.isEmpty()) {
-                    // Nếu đăng nhập thành công (s là chuỗi rỗng), chuyển hướng theo vai trò người dùng
+                if (s.isEmpty()) { // Thành công (Firebase trả về chuỗi rỗng)
                     if (GlobalData.user.getRole() == EnumUserRole.STUDENT.value && BuildConfig.ROLE.equals("STUDENT")) {
                         navController.navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment());
-                    } else if (GlobalData.user.getRole() == EnumUserRole.EMPLOYEE.value && BuildConfig.ROLE == "EMPLOYEE") {
+                    } else if (GlobalData.user.getRole() == EnumUserRole.EMPLOYEE.value && BuildConfig.ROLE.equals("EMPLOYEE")) {
                         navController.navigate(LoginFragmentDirections.actionLoginFragmentToClientMainNav());
-                    } else if (GlobalData.user.getRole() == EnumUserRole.ADMIN.value && BuildConfig.ROLE == "ADMIN") {
+                    } else if (GlobalData.user.getRole() == EnumUserRole.ADMIN.value && BuildConfig.ROLE.equals("ADMIN")) {
                         navController.navigate(LoginFragmentDirections.actionLoginFragmentToAdminMainNav());
                     } else {
                         GlobalFunction.showToastMessage(requireContext(), "Không tìm thấy tài khoản!");
                     }
                 } else {
-                    // Nếu có lỗi đăng nhập, hiển thị thông báo lỗi
+                    // Nếu có lỗi, hiện thông báo lỗi
                     GlobalFunction.showToastMessage(requireContext(), s);
                 }
-
-                // Xoá kết quả đăng nhập sau khi xử lý
-                viewModel.clearLoginResponse();
+                viewModel.clearLoginResponse(); // Reset kết quả sau khi xử lý
             }
         });
     }
