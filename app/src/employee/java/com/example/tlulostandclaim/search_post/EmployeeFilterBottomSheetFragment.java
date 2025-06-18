@@ -19,7 +19,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeFilterBottomSheetFragment extends BottomSheetDialogFragment {
+public class EmployeeFilterBottomSheetFragment extends BottomSheetDialogFragment implements EmployeeFilterCategoryAdapter.FilterCategoryInteract {
 
     private NavController navController;
     private FragmentFilterBottomSheetBinding binding;
@@ -33,7 +33,7 @@ public class EmployeeFilterBottomSheetFragment extends BottomSheetDialogFragment
         navController = NavHostFragment.findNavController(EmployeeFilterBottomSheetFragment.this);
         viewModel = new ViewModelProvider(requireActivity()).get(ClientSearchPostsViewModel.class);
         binding = FragmentFilterBottomSheetBinding.inflate(inflater, container, false);
-        filterCategoryAdapter = new EmployeeFilterCategoryAdapter(categoryModelList, null);
+        filterCategoryAdapter = new EmployeeFilterCategoryAdapter(categoryModelList, this);
         viewModel.getCategory();
         return binding.getRoot();
     }
@@ -48,5 +48,10 @@ public class EmployeeFilterBottomSheetFragment extends BottomSheetDialogFragment
             categoryModelList.addAll(s);
             filterCategoryAdapter.notifyDataSetChanged();
         });
+    }
+    @Override
+    public void onSelect(CategoryModel model) {
+        viewModel.chooseCategoryFilter(model);
+        navController.navigateUp();
     }
 }
