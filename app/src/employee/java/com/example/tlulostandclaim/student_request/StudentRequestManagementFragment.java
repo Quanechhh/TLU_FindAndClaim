@@ -13,6 +13,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import android.os.Handler;
+import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
+
+import com.example.tlulostandclaim.R;
 
 import com.example.tlulostandclaim.databinding.FragmentStudentRequestManagementBinding;
 import com.example.tlulostandclaim.data.model.RequestLostItemModel;
@@ -26,6 +32,8 @@ public class StudentRequestManagementFragment extends Fragment implements Studen
     private StudentRequestManagementViewModel viewModel;
     private List<RequestLostItemModel> lostItemModels = new ArrayList<>();
     private StudentRequestItemAdapter studentRequestItemAdapter;
+    private final Handler handler = new Handler(Looper.getMainLooper());
+    private Runnable workRunnable;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +53,20 @@ public class StudentRequestManagementFragment extends Fragment implements Studen
         binding.toolbarSearch.textToolbarTitle.setText("Quản lý yêu cầu nhận đồ");
         binding.listOfItems.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.listOfItems.setAdapter(studentRequestItemAdapter);
+        binding.inputSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (workRunnable != null) handler.removeCallbacks(workRunnable);
+                workRunnable = () -> performSearch(s.toString());
+                handler.postDelayed(workRunnable, 300);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
 
         observeData();
     }
@@ -57,8 +79,11 @@ public class StudentRequestManagementFragment extends Fragment implements Studen
             studentRequestItemAdapter.notifyDataSetChanged();
         });
     }
+    private void performSearch(String text) {
+        viewModel.searchItems(text);
+    }
 
-    @Override
+@Override
     public void onChosen(RequestLostItemModel item) {
         navController.navigate(StudentRequestManagementFragmentDirections
                 .actionStudentRequestManagementFragmentToDetailStudentRequestFragment(item.getId()));
