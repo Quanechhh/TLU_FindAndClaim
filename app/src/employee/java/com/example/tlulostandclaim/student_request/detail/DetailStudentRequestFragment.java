@@ -1,5 +1,6 @@
 package com.example.tlulostandclaim.student_request.detail;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +17,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.tlulostandclaim.databinding.FragmentDetailStudentRequestBinding;
 import com.example.tlulostandclaim.student_request.StudentRequestManagementViewModel;
 import com.example.tlulostandclaim.ui.student.add_post.adapter.ImageAdapter;
+import com.example.tlulostandclaim.utils.GlobalData;
+import com.example.tlulostandclaim.utils.GlobalFunction;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class DetailStudentRequestFragment extends Fragment {
     private FragmentDetailStudentRequestBinding binding;
     private NavController navController;
@@ -46,18 +50,36 @@ public class DetailStudentRequestFragment extends Fragment {
         binding.toolbarDetailPost.textToolbarTitle.setText("Chi tiết yêu cầu");
         binding.listOfImages.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         binding.listOfImages.setAdapter(imageAdapter);
+        binding.btnAgree.setOnClickListener(v -> {
+            binding.progressBar.setVisibility(View.VISIBLE);
+            viewModel.updateRequestStatus(1, navArgs.getPostId());
+        });
+        binding.btnDecline.setOnClickListener(v -> {
+            binding.progressBar.setVisibility(View.VISIBLE);
+            viewModel.updateRequestStatus(2, navArgs.getPostId());
+        });
         observeData();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void observeData() {
         viewModel.getItemResponse().observe(getViewLifecycleOwner(), s -> {
-            binding.inputReleaseDate.setText(String.valueOf(s.getCreatedAt())); // dùng tạm, format sẽ ở commit 2
+            binding.inputReleaseDate.setText(GlobalFunction.formatDateTimeFromMillisecond(s.getCreatedAt()));
             binding.inputName.setText(s.getItemName());
             binding.inputUserName.setText(s.getUserName());
             binding.inputPhone.setText(s.getUserPhone());
             list.clear();
             list.addAll(s.getItemImage());
             imageAdapter.notifyDataSetChanged();
+        });
+
+        viewModel.updateRequestResponse().observe(getViewLifecycleOwner(), s -> {
+            if (s) {
+                GlobalFunction.showToastMessage(requireContext(), GlobalData.commonSuccess);
+            } else {
+                GlobalFunction.showToastMessage(requireContext(), GlobalData.commonError);
+            }
+            binding.progressBar.setVisibility(View.GONE);
         });
     }
 }
