@@ -22,7 +22,6 @@ import com.example.tlulostandclaim.utils.GlobalData;
 import com.example.tlulostandclaim.utils.GlobalFunction;
 
 public class LoginFragment extends Fragment {
-
     private FragmentLoginBinding binding;
     private LoginViewModel viewModel;
     private NavController navController;
@@ -39,7 +38,6 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         binding.buttonSignIn.setOnClickListener(v -> {
             String email = binding.inputEmail.getText().toString();
             String password = binding.inputPassword.getText().toString();
@@ -49,12 +47,12 @@ public class LoginFragment extends Fragment {
                 viewModel.loginEmail(new User(email, password));
             }
         });
-
         if (BuildConfig.ROLE == "ADMIN") {
             binding.textForgetPassword.setVisibility(View.INVISIBLE);
             binding.textSignUp.setVisibility(View.INVISIBLE);
         }
-
+        binding.inputEmail.setText("vanrap13062003@gmail.com");
+        binding.inputPassword.setText("123456");
         binding.imageShowPassword.setOnClickListener(v -> {
             viewModel.isHidePassword = !viewModel.isHidePassword;
 
@@ -70,27 +68,25 @@ public class LoginFragment extends Fragment {
                 );
             }
         });
-
         binding.textSignUp.setOnClickListener(v -> {
             navController.navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment());
-            viewModel.clearLoginResponse(); /
+            viewModel.clearLoginResponse();
         });
-
         binding.textForgetPassword.setOnClickListener(v -> {
             navController.navigate(LoginFragmentDirections.actionLoginFragmentToForgetPasswordFragment());
         });
-
         observeData();
     }
+
     private void observeData() {
         viewModel.loginUserResponse().observe(getViewLifecycleOwner(), s -> {
             if (s != null) {
                 if (s.isEmpty()) {
                     if (GlobalData.user.getRole() == EnumUserRole.STUDENT.value && BuildConfig.ROLE.equals("STUDENT")) {
                         navController.navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment());
-                    } else if (GlobalData.user.getRole() == EnumUserRole.EMPLOYEE.value && BuildConfig.ROLE.equals("EMPLOYEE")) {
+                    } else if (GlobalData.user.getRole() == EnumUserRole.EMPLOYEE.value && BuildConfig.ROLE == "EMPLOYEE") {
                         navController.navigate(LoginFragmentDirections.actionLoginFragmentToClientMainNav());
-                    } else if (GlobalData.user.getRole() == EnumUserRole.ADMIN.value && BuildConfig.ROLE.equals("ADMIN")) {
+                    } else if (GlobalData.user.getRole() == EnumUserRole.ADMIN.value && BuildConfig.ROLE == "ADMIN") {
                         navController.navigate(LoginFragmentDirections.actionLoginFragmentToAdminMainNav());
                     } else {
                         GlobalFunction.showToastMessage(requireContext(), "Không tìm thấy tài khoản!");
