@@ -1,4 +1,4 @@
-package com.example.tlulostandclaim.ui;
+package com.example.tlulostandclaim.ui.category;
 
 import android.os.Bundle;
 
@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tlulostandclaim.R;
-import com.example.tlulostandclaim.data.CategoryModel;
+import com.example.tlulostandclaim.data.model.CategoryModel;
 import com.example.tlulostandclaim.databinding.FragmentAddCategoryBinding;
 import com.example.tlulostandclaim.databinding.FragmentCategoryManagementBinding;
 import com.example.tlulostandclaim.utils.GlobalData;
