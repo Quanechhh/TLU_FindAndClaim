@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true"
+        tools:context=".ui.admin.movie.AddNewAndEditMovieFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <include
+                android:id="@+id/toolbar_detail_post"
+                layout="@layout/layout_common_toolbar"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_50"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.2" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_80"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.8" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_of_images"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_12sdp"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_detail_post" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_edit_images"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="Sửa"
+                android:textColor="@color/color_primary"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintStart_toStartOf="@id/list_of_images"
+                app:layout_constraintTop_toBottomOf="@+id/list_of_images" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="Tên "
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/text_edit_images" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/input_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/bg_edittext_input_form"
+                android:paddingVertical="@dimen/_10sdp"
+                android:paddingStart="@dimen/_12sdp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color_grey_stroke_bold"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintTop_toBottomOf="@+id/text_title" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:text="Mô tả"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/input_name" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/input_description"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_edittext_input_form"
+                android:gravity="start"
+                android:inputType="textMultiLine"
+                android:paddingVertical="@dimen/_10sdp"
+                android:paddingStart="@dimen/_12sdp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color_grey_stroke_bold"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintTop_toBottomOf="@+id/text_description" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_lost_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:text="Địa điểm mất"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/text_title"
+                app:layout_constraintTop_toBottomOf="@+id/input_description" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/input_lost_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/bg_edittext_input_form"
+                android:paddingVertical="@dimen/_8sdp"
+                android:paddingStart="@dimen/_12sdp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color_grey_stroke_bold"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintTop_toBottomOf="@+id/text_lost_location" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:text="Ngày mất"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/text_title"
+                app:layout_constraintTop_toBottomOf="@+id/input_lost_location" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/input_release_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/bg_edittext_input_form"
+                android:hint="dd/mm/yyyy"
+                android:paddingVertical="@dimen/_8sdp"
+                android:paddingStart="@dimen/_12sdp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color_grey_stroke_bold"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintEnd_toEndOf="@id/input_lost_location"
+                app:layout_constraintStart_toStartOf="@id/text_date"
+                app:layout_constraintTop_toBottomOf="@id/text_date" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_contact_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:text="Thông tin liên lạc"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/text_title"
+                app:layout_constraintTop_toBottomOf="@+id/input_release_date" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/input_contact_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/bg_edittext_input_form"
+                android:paddingVertical="@dimen/_8sdp"
+                android:paddingStart="@dimen/_12sdp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/color_grey_stroke_bold"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintEnd_toEndOf="@id/input_lost_location"
+                app:layout_constraintStart_toStartOf="@id/text_contact_info"
+                app:layout_constraintTop_toBottomOf="@id/text_contact_info" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linear_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_20sdp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/input_contact_info">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_delete"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button_sign_in"
+                    android:minHeight="0dp"
+                    android:paddingVertical="@dimen/_10sdp"
+                    android:text="Xoá"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_18ssp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_save"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_16sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button_sign_in"
+                    android:minHeight="0dp"
+                    android:paddingVertical="@dimen/_10sdp"
+                    android:text="Lưu"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_18ssp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
