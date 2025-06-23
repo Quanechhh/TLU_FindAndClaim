@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_nav"
+    app:startDestination="@id/mainHomeFragment">
+
+    <fragment
+        android:id="@+id/mainHomeFragment"
+        android:name="com.example.tlulostandclaim.ui.student.main_home.MainHomeFragment"
+        android:label="MainHomeFragment">
+        <action
+            android:id="@+id/action_mainHomeFragment_to_lostItemSearchFragment"
+            app:destination="@id/lostItemSearchFragment" />
+        <action
+            android:id="@+id/action_mainHomeFragment_to_addLostItemPostFragment"
+            app:destination="@id/addLostItemPostFragment" />
+        <action
+            android:id="@+id/action_mainHomeFragment_to_myPostManagementFragment"
+            app:destination="@id/myPostManagementFragment" />
+        <action
+            android:id="@+id/action_mainHomeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_mainHomeFragment_to_detailPostFragment"
+            app:destination="@id/detailPostFragment" />
+        <action
+            android:id="@+id/action_mainHomeFragment_to_detailInStorageLostItemFragment"
+            app:destination="@id/detailInStorageLostItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lostItemSearchFragment"
+        android:name="com.example.tlulostandclaim.ui.student.search.LostItemSearchFragment"
+        android:label="LostItemSearchFragment">
+        <action
+            android:id="@+id/action_lostItemSearchFragment_to_detailPostFragment"
+            app:destination="@id/detailPostFragment" />
+        <action
+            android:id="@+id/action_lostItemSearchFragment_to_detailInStorageLostItemFragment"
+            app:destination="@id/detailInStorageLostItemFragment" />
+        <action
+            android:id="@+id/action_lostItemSearchFragment_to_filterBottomSheetFragment2"
+            app:destination="@id/filterBottomSheetFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/addLostItemPostFragment"
+        android:name="com.example.tlulostandclaim.ui.student.add_post.AddLostItemPostFragment"
+        android:label="AddLostItemPostFragment" />
+    <fragment
+        android:id="@+id/myPostManagementFragment"
+        android:name="com.example.tlulostandclaim.ui.student.my_post.MyPostManagementFragment"
+        android:label="MyPostManagementFragment">
+        <action
+            android:id="@+id/action_myPostManagementFragment_to_detailPostFragment"
+            app:destination="@id/detailPostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.tlulostandclaim.ui.student.profile.ProfileFragment"
+        android:label="ProfileFragment">
+        <action
+            android:id="@+id/action_profileFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.tlulostandclaim.ui.student.change_password.ChangePasswordFragment"
+        android:label="ChangePasswordFragment" />
+    <fragment
+        android:id="@+id/detailPostFragment"
+        android:name="com.example.tlulostandclaim.ui.student.detail_post.DetailPostFragment"
+        android:label="DetailPostFragment">
+        <argument
+            android:name="postId"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailInStorageLostItemFragment"
+        android:name="com.example.tlulostandclaim.ui.student.detail_post.in_storage.DetailInStorageLostItemFragment"
+        android:label="DetailInStorageLostItemFragment">
+        <argument
+            android:name="postId"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
+    <dialog
+        android:id="@+id/filterBottomSheetFragment2"
+        android:name="com.example.tlulostandclaim.ui.student.search.FilterBottomSheetFragment"
+        android:label="FilterBottomSheetFragment" />
+</navigation>

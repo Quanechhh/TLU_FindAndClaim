@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/admin_main_nav"
+    app:startDestination="@id/homeAdminFragment2">
+
+    <fragment
+        android:id="@+id/homeAdminFragment2"
+        android:name="com.example.tlulostandclaim.ui.home.HomeAdminFragment"
+        android:label="HomeAdminFragment">
+        <action
+            android:id="@+id/action_homeAdminFragment2_to_adminUserManagementFragment"
+            app:destination="@id/adminUserManagementFragment" />
+        <action
+            android:id="@+id/action_homeAdminFragment2_to_categoryManagementFragment"
+            app:destination="@id/categoryManagementFragment" />
+        <action
+            android:id="@+id/action_homeAdminFragment2_to_adminStasticFragment"
+            app:destination="@id/adminStasticFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminUserManagementFragment"
+        android:name="com.example.tlulostandclaim.ui.user.AdminUserManagementFragment"
+        android:label="AdminUserManagementFragment">
+        <action
+            android:id="@+id/action_adminUserManagementFragment_to_registerFragment22"
+            app:destination="@id/registerFragment2" />
+        <action
+            android:id="@+id/action_adminUserManagementFragment_to_adminDetailUserFragment"
+            app:destination="@id/adminDetailUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment2"
+        android:name="com.example.tlulostandclaim.ui.register.RegisterFragment"
+        android:label="RegisterFragment" />
+    <fragment
+        android:id="@+id/adminDetailUserFragment"
+        android:name="com.example.tlulostandclaim.ui.user.AdminDetailUserFragment"
+        android:label="AdminDetailUserFragment">
+        <argument
+            android:name="id"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryManagementFragment"
+        android:name="com.example.tlulostandclaim.ui.category.CategoryManagementFragment"
+        android:label="CategoryManagementFragment" >
+        <action
+            android:id="@+id/action_categoryManagementFragment_to_addCategoryFragment"
+            app:destination="@id/addCategoryFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/addCategoryFragment"
+        android:name="com.example.tlulostandclaim.ui.category.AddCategoryFragment"
+        android:label="AddCategoryFragment" />
+    <fragment
+        android:id="@+id/adminStasticFragment"
+        android:name="com.example.tlulostandclaim.ui.statistic.AdminStasticFragment"
+        android:label="AdminStasticFragment" />
+
+</navigation>
