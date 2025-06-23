@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/client_main_nav"
+    app:startDestination="@id/homeClientFragment2">
+
+    <fragment
+        android:id="@+id/homeClientFragment2"
+        android:name="com.example.tlulostandclaim.home.HomeEmployeeFragment"
+        android:label="HomeClientFragment">
+        <action
+            android:id="@+id/action_homeClientFragment2_to_searchPostsFragment"
+            app:destination="@id/searchPostsFragment" />
+        <action
+            android:id="@+id/action_homeClientFragment2_to_clientDetailPostFragment"
+            app:destination="@id/clientDetailPostFragment" />
+        <action
+            android:id="@+id/action_homeClientFragment2_to_addLostItemFragment"
+            app:destination="@id/addLostItemFragment" />
+        <action
+            android:id="@+id/action_homeClientFragment2_to_inStorageItemManagementFragment"
+            app:destination="@id/inStorageItemManagementFragment" />
+        <action
+            android:id="@+id/action_homeClientFragment2_to_studentRequestManagementFragment"
+            app:destination="@id/studentRequestManagementFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchPostsFragment"
+        android:name="com.example.tlulostandclaim.search_post.SearchPostsFragment"
+        android:label="SearchPostsFragment">
+        <action
+            android:id="@+id/action_searchPostsFragment_to_clientDetailPostFragment"
+            app:destination="@id/clientDetailPostFragment" />
+        <action
+            android:id="@+id/action_searchPostsFragment_to_employeeFilterBottomSheetFragment"
+            app:destination="@id/employeeFilterBottomSheetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/clientDetailPostFragment"
+        android:name="com.example.tlulostandclaim.detail_post.ClientDetailPostFragment"
+        android:label="fragment_client_detail_post"
+        tools:layout="@layout/fragment_client_detail_post">
+        <argument
+            android:name="postId"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/addLostItemFragment"
+        android:name="com.example.tlulostandclaim.add_items.AddLostItemFragment"
+        android:label="AddLostItemFragment" />
+    <fragment
+        android:id="@+id/employeeDetailInStorageLostItemFragment"
+        android:name="com.example.tlulostandclaim.detail_post.in_storage.EmployeeDetailInStorageLostItemFragment"
+        android:label="EmployeeDetailInStorageLostItemFragment">
+        <argument
+            android:name="postId"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/inStorageItemManagementFragment"
+        android:name="com.example.tlulostandclaim.in_storage_item_management.InStorageItemManagementFragment"
+        android:label="InStorageItemManagementFragment">
+        <action
+            android:id="@+id/action_inStorageItemManagementFragment_to_employeeDetailInStorageLostItemFragment"
+            app:destination="@id/employeeDetailInStorageLostItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentRequestManagementFragment"
+        android:name="com.example.tlulostandclaim.student_request.StudentRequestManagementFragment"
+        android:label="StudentRequestManagementFragment">
+        <action
+            android:id="@+id/action_studentRequestManagementFragment_to_detailStudentRequestFragment"
+            app:destination="@id/detailStudentRequestFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailStudentRequestFragment"
+        android:name="com.example.tlulostandclaim.student_request.detail.DetailStudentRequestFragment"
+        android:label="DetailStudentRequestFragment">
+        <argument
+            android:name="postId"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
+    <dialog
+        android:id="@+id/employeeFilterBottomSheetFragment"
+        android:name="com.example.tlulostandclaim.search_post.EmployeeFilterBottomSheetFragment"
+        android:label="EmployeeFilterBottomSheetFragment" />
+</navigation>
