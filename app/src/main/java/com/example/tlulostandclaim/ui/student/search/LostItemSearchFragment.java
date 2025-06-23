@@ -19,16 +19,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.tlulostandclaim.R;
 import com.example.tlulostandclaim.data.model.InStorageLostItemModel;
-import com.example.tlulostandclaim.data.model.LostItemModel;
 import com.example.tlulostandclaim.databinding.FragmentLostItemSearchBinding;
-import com.example.tlulostandclaim.ui.login.LoginFragment;
 import com.example.tlulostandclaim.ui.student.main_home.MainHomeFragmentDirections;
 import com.example.tlulostandclaim.ui.student.main_home.adapter.InStorageLostItemAdapter;
-import com.example.tlulostandclaim.ui.student.main_home.adapter.LostItemAdapter;
-
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.List;
