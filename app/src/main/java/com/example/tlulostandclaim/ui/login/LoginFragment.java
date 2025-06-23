@@ -51,8 +51,6 @@ public class LoginFragment extends Fragment {
             binding.textForgetPassword.setVisibility(View.INVISIBLE);
             binding.textSignUp.setVisibility(View.INVISIBLE);
         }
-        binding.inputEmail.setText("vanrap13062003@gmail.com");
-        binding.inputPassword.setText("123456");
         binding.imageShowPassword.setOnClickListener(v -> {
             viewModel.isHidePassword = !viewModel.isHidePassword;
 
