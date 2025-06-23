@@ -34,7 +34,6 @@
             android:drawableStart="@drawable/ic_search_24"
             android:drawableTint="@color/black"
             android:hint="Tìm kiếm người dùng..."
-            android:minHeight="48dp"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_12sdp"
             android:paddingEnd="@dimen/_12sdp"
@@ -50,7 +49,6 @@
             android:layout_marginHorizontal="@dimen/_12sdp"
             android:layout_marginVertical="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/input_search"
-            tools:ignore="SpeakableTextPresentCheck" />
+            app:layout_constraintTop_toBottomOf="@id/input_search" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

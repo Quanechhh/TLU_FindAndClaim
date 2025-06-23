@@ -6,7 +6,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/white"
+        tools:context=".ui.student.search.LostItemSearchFragment">
 
         <include
             android:id="@+id/toolbar_search"
@@ -33,15 +34,13 @@
             android:drawableStart="@drawable/ic_search_24"
             android:drawableTint="@color/black"
             android:hint="Tìm kiếm..."
-            android:minHeight="48dp"
             android:paddingVertical="@dimen/_10sdp"
             android:paddingStart="@dimen/_12sdp"
             android:paddingEnd="@dimen/_12sdp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="@dimen/_16ssp"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_search"
-            tools:layout_editor_absoluteX="12dp" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_search" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_of_category"
@@ -50,8 +49,6 @@
             android:layout_marginHorizontal="@dimen/_12sdp"
             android:layout_marginVertical="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/input_search"
-            tools:ignore="SpeakableTextPresentCheck"
-            tools:layout_editor_absoluteX="12dp" />
+            app:layout_constraintTop_toBottomOf="@id/input_search" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
