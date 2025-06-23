@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.tlulostandclaim.data.model.CategoryModel;
 import com.example.tlulostandclaim.databinding.FragmentFilterBottomSheetBinding;
+import com.example.tlulostandclaim.ui.student.search.LostItemSearchViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
@@ -43,12 +44,13 @@ public class EmployeeFilterBottomSheetFragment extends BottomSheetDialogFragment
         super.onViewCreated(view, savedInstanceState);
         binding.listOfCategory.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         binding.listOfCategory.setAdapter(filterCategoryAdapter);
-        viewModel.listOfCategory().observe(getViewLifecycleOwner(), s -> {
+        viewModel.listOfCategory().observe(getViewLifecycleOwner(),s->{
             categoryModelList.clear();
             categoryModelList.addAll(s);
             filterCategoryAdapter.notifyDataSetChanged();
         });
     }
+
     @Override
     public void onSelect(CategoryModel model) {
         viewModel.chooseCategoryFilter(model);
