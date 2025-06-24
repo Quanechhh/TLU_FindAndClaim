@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.tlulostandclaim.data.model.User;
+import com.example.tlulostandclaim.utils.GlobalData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.AuthResult;
@@ -32,7 +33,7 @@ public class RegisterViewModel extends ViewModel {
             if (task.isSuccessful() && task.getResult() != null) {
                 FirebaseUser firebaseUser = task.getResult().getUser();
                 if (firebaseUser != null) {
-                    User userWithId = new User(
+                     User userWithId = new User(
                             firebaseUser.getUid(),
                             user.getFullName(),
                             user.getMobilePhone(),

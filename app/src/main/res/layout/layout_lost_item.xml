@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_12sdp"
+        android:background="@drawable/bg_card_view_stroke"
+        android:paddingBottom="@dimen/_14sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_lost_image"
+                android:layout_width="@dimen/_68sdp"
+                android:layout_height="@dimen/_68sdp"
+                android:layout_margin="@dimen/_14sdp"
+                app:cardBackgroundColor="@color/color_gray_dark"
+                app:cardCornerRadius="@dimen/_15sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_lost_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    tools:src="@mipmap/ic_launcher" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_lost_item_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/text_lost_item_status"
+                app:layout_constraintStart_toEndOf="@id/card_lost_image"
+                app:layout_constraintTop_toTopOf="@id/card_lost_image"
+                tools:text="Chìa khoá" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_lost_item_category"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/text_lost_item_status"
+                app:layout_constraintStart_toEndOf="@id/card_lost_image"
+                app:layout_constraintTop_toBottomOf="@id/text_lost_item_name"
+                tools:text="20/05/2025" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_lost_item_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/color_grey_stroke_bold"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/text_lost_item_status"
+                app:layout_constraintStart_toEndOf="@id/card_lost_image"
+                app:layout_constraintTop_toBottomOf="@id/text_lost_item_category"
+                tools:text="20/05/2025" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_lost_item_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="20/05/2025" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
