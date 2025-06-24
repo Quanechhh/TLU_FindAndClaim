@@ -113,6 +113,7 @@ public class LostItemModel {
         hm.put("lostLocation", lostLocation);
         hm.put("lostDate", lostDate);
         hm.put("contactInfo", contactInfo);
+        hm.put("userId", userId);
         return hm;
     }
 }

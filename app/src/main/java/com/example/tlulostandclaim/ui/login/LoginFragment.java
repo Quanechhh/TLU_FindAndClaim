@@ -47,6 +47,9 @@ public class LoginFragment extends Fragment {
                 viewModel.loginEmail(new User(email, password));
             }
         });
+        if (BuildConfig.ROLE != "STUDENT") {
+            binding.textSignUp.setVisibility(View.INVISIBLE);
+        }
         if (BuildConfig.ROLE == "ADMIN") {
             binding.textForgetPassword.setVisibility(View.INVISIBLE);
             binding.textSignUp.setVisibility(View.INVISIBLE);
