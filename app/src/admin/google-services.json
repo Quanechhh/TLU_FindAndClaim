@@ -1,0 +1,87 @@
+{
+  "project_info": {
+    "project_number": "191471260483",
+    "firebase_url": "https://lovematcher-ee408-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "lovematcher-ee408",
+    "storage_bucket": "lovematcher-ee408.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191471260483:android:e8295bf975829ccfd895f6",
+        "android_client_info": {
+          "package_name": "com.example.lovematch"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG0VlkKYvaKY-LOzoCVQUKWM-SauCsM1o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191471260483:android:57dc5ad4f5c2ca1fd895f6",
+        "android_client_info": {
+          "package_name": "com.example.tlulostandclaim"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG0VlkKYvaKY-LOzoCVQUKWM-SauCsM1o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191471260483:android:381dccf65e5d4fbed895f6",
+        "android_client_info": {
+          "package_name": "com.example.tlulostandclaim.admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG0VlkKYvaKY-LOzoCVQUKWM-SauCsM1o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191471260483:android:cf834ae30bd7dd74d895f6",
+        "android_client_info": {
+          "package_name": "com.example.tlulostandclaim.client"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG0VlkKYvaKY-LOzoCVQUKWM-SauCsM1o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

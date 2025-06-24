@@ -3,19 +3,25 @@ package com.example.tlulostandclaim.ui.login;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import com.example.tlulostandclaim.data.model.User;
 
+import com.example.tlulostandclaim.data.model.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.example.tlulostandclaim.utils.GlobalData;
+
 public class LoginViewModel extends ViewModel {
 
     boolean isHidePassword = true;
+
     private MutableLiveData<String> _loginUserResponse = new MutableLiveData<>();
     public LiveData<String> loginUserResponse() {
         return _loginUserResponse;
     }
+
     public void clearLoginResponse() {
         _loginUserResponse.setValue(null);
     }
+
     private MutableLiveData<String> _changePasswordResponse = new MutableLiveData<>();
     public LiveData<String> changePasswordResponse() {
         return _changePasswordResponse;
@@ -23,7 +29,6 @@ public class LoginViewModel extends ViewModel {
 
     void loginEmail(User user) {
         GlobalData.firebaseAuth.signInWithEmailAndPassword(user.getEmail(), user.getPassword())
-
                 .addOnSuccessListener(authResult -> {
                     if (authResult.getUser() != null) {
                         GlobalData.firebaseDB.collection("users")
@@ -43,15 +48,13 @@ public class LoginViewModel extends ViewModel {
                         _loginUserResponse.setValue("Đã có lỗi xảy ra, vui lòng thử lại!");
                     }
                 })
-
                 .addOnFailureListener(e -> _loginUserResponse.setValue(e.toString()));
     }
+
     void changePassword(User user) {
         GlobalData.firebaseAuth.getCurrentUser()
                 .updatePassword(user.getPassword())
-
                 .addOnSuccessListener(unused -> _changePasswordResponse.setValue(""))
-
-                .addOnFailureListener(e -> _changePasswordResponse.setValue(e.getMessage().toString()));
+                .addOnFailureListener(e -> _changePasswordResponse.setValue(e.getMessage()));
     }
 }
