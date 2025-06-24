@@ -19,6 +19,7 @@ import com.example.tlulostandclaim.data.enum_model.EnumUserRole;
 import com.example.tlulostandclaim.data.model.User;
 import com.example.tlulostandclaim.databinding.FragmentLoginBinding;
 import com.example.tlulostandclaim.utils.GlobalFunction;
+import com.example.tlulostandclaim.utils.GlobalData;
 
 public class LoginFragment extends Fragment {
     private FragmentLoginBinding binding;
@@ -46,10 +47,16 @@ public class LoginFragment extends Fragment {
                 viewModel.loginEmail(new User(email, password));
             }
         });
-        if (BuildConfig.ROLE == "ADMIN") {
+
+        if (BuildConfig.ROLE.equals("ADMIN")) {
             binding.textForgetPassword.setVisibility(View.INVISIBLE);
             binding.textSignUp.setVisibility(View.INVISIBLE);
         }
+
+        // Dữ liệu test sẵn (tùy chọn giữ lại hoặc xóa)
+        binding.inputEmail.setText("vanrap13062003@gmail.com");
+        binding.inputPassword.setText("123456");
+
         binding.imageShowPassword.setOnClickListener(v -> {
             viewModel.isHidePassword = !viewModel.isHidePassword;
 
@@ -65,13 +72,16 @@ public class LoginFragment extends Fragment {
                 );
             }
         });
+
         binding.textSignUp.setOnClickListener(v -> {
             navController.navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment());
             viewModel.clearLoginResponse();
         });
+
         binding.textForgetPassword.setOnClickListener(v -> {
             navController.navigate(LoginFragmentDirections.actionLoginFragmentToForgetPasswordFragment());
         });
+
         observeData();
     }
 
@@ -81,18 +91,5 @@ public class LoginFragment extends Fragment {
                 if (s.isEmpty()) {
                     if (GlobalData.user.getRole() == EnumUserRole.STUDENT.value && BuildConfig.ROLE.equals("STUDENT")) {
                         navController.navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment());
-                    } else if (GlobalData.user.getRole() == EnumUserRole.EMPLOYEE.value && BuildConfig.ROLE == "EMPLOYEE") {
+                    } else if (GlobalData.user.getRole() == EnumUserRole.EMPLOYEE.value && BuildConfig.ROLE.equals("EMPLOYEE")) {
                         navController.navigate(LoginFragmentDirections.actionLoginFragmentToClientMainNav());
-                    } else if (GlobalData.user.getRole() == EnumUserRole.ADMIN.value && BuildConfig.ROLE == "ADMIN") {
-                        navController.navigate(LoginFragmentDirections.actionLoginFragmentToAdminMainNav());
-                    } else {
-                        GlobalFunction.showToastMessage(requireContext(), "Không tìm thấy tài khoản!");
-                    }
-                } else {
-                    GlobalFunction.showToastMessage(requireContext(), s);
-                }
-                viewModel.clearLoginResponse();
-            }
-        });
-    }
-}

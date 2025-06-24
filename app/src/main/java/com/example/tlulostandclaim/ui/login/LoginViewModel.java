@@ -5,56 +5,96 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.tlulostandclaim.data.model.User;
+import com.example.tlulostandclaim.utils.GlobalData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.example.tlulostandclaim.utils.GlobalData;
 
 public class LoginViewModel extends ViewModel {
 
-    boolean isHidePassword = true;
+    public boolean isPasswordVisible = false;
 
-    private MutableLiveData<String> _loginUserResponse = new MutableLiveData<>();
-    public LiveData<String> loginUserResponse() {
-        return _loginUserResponse;
+    private final FirebaseAuth auth = GlobalData.firebaseAuth;
+    private final FirebaseFirestore db = GlobalData.firebaseDB;
+
+    // Wrapper kết quả: trạng thái (success/fail) + thông điệp
+    public static class Result {
+        public boolean success;
+        public String message;
+
+        public Result(boolean success, String message) {
+            this.success = success;
+            this.message = message;
+        }
     }
 
-    public void clearLoginResponse() {
-        _loginUserResponse.setValue(null);
+    // LiveData cho kết quả đăng nhập
+    private final MutableLiveData<Result> _loginResult = new MutableLiveData<>();
+    public LiveData<Result> getLoginResult() {
+        return _loginResult;
     }
 
-    private MutableLiveData<String> _changePasswordResponse = new MutableLiveData<>();
-    public LiveData<String> changePasswordResponse() {
-        return _changePasswordResponse;
+    // LiveData cho kết quả đổi mật khẩu
+    private final MutableLiveData<Result> _changePasswordResult = new MutableLiveData<>();
+    public LiveData<Result> getChangePasswordResult() {
+        return _changePasswordResult;
     }
 
-    void loginEmail(User user) {
-        GlobalData.firebaseAuth.signInWithEmailAndPassword(user.getEmail(), user.getPassword())
+    public void clearLoginResult() {
+        _loginResult.setValue(null);
+    }
+
+    public void clearChangePasswordResult() {
+        _changePasswordResult.setValue(null);
+    }
+
+    /**
+     * Đăng nhập người dùng bằng email và mật khẩu.
+     */
+    public void performLogin(User user) {
+        auth.signInWithEmailAndPassword(user.getEmail(), user.getPassword())
                 .addOnSuccessListener(authResult -> {
-                    if (authResult.getUser() != null) {
-                        GlobalData.firebaseDB.collection("users")
-                                .document(authResult.getUser().getUid())
-                                .get()
-                                .addOnSuccessListener(documentSnapshot -> {
-                                    User model = documentSnapshot.toObject(User.class);
-
-                                    if (model != null) {
-                                        GlobalData.user = model;
-                                        _loginUserResponse.setValue("");
-                                    } else {
-                                        _loginUserResponse.setValue("Đã có lỗi xảy ra, vui lòng thử lại!");
-                                    }
-                                });
-                    } else {
-                        _loginUserResponse.setValue("Đã có lỗi xảy ra, vui lòng thử lại!");
+                    if (authResult.getUser() == null) {
+                        _loginResult.setValue(new Result(false, "Người dùng không tồn tại!"));
+                        return;
                     }
+
+                    String uid = authResult.getUser().getUid();
+
+                    db.collection("users").document(uid).get()
+                            .addOnSuccessListener(document -> {
+                                User fetchedUser = document.toObject(User.class);
+                                if (fetchedUser != null) {
+                                    GlobalData.user = fetchedUser;
+                                    _loginResult.setValue(new Result(true, "Đăng nhập thành công"));
+                                } else {
+                                    _loginResult.setValue(new Result(false, "Không tìm thấy thông tin người dùng."));
+                                }
+                            })
+                            .addOnFailureListener(e -> {
+                                _loginResult.setValue(new Result(false, "Lỗi khi truy cập dữ liệu: " + e.getMessage()));
+                            });
+
                 })
-                .addOnFailureListener(e -> _loginUserResponse.setValue(e.toString()));
+                .addOnFailureListener(e -> {
+                    _loginResult.setValue(new Result(false, "Lỗi đăng nhập: " + e.getMessage()));
+                });
     }
 
-    void changePassword(User user) {
-        GlobalData.firebaseAuth.getCurrentUser()
-                .updatePassword(user.getPassword())
-                .addOnSuccessListener(unused -> _changePasswordResponse.setValue(""))
-                .addOnFailureListener(e -> _changePasswordResponse.setValue(e.getMessage()));
+    /**
+     * Đổi mật khẩu cho người dùng hiện tại.
+     */
+    public void performChangePassword(String newPassword) {
+        if (auth.getCurrentUser() == null) {
+            _changePasswordResult.setValue(new Result(false, "Người dùng chưa đăng nhập."));
+            return;
+        }
+
+        auth.getCurrentUser().updatePassword(newPassword)
+                .addOnSuccessListener(aVoid -> {
+                    _changePasswordResult.setValue(new Result(true, "Đổi mật khẩu thành công"));
+                })
+                .addOnFailureListener(e -> {
+                    _changePasswordResult.setValue(new Result(false, "Lỗi: " + e.getMessage()));
+                });
     }
 }
